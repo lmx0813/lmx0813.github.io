@@ -7,17 +7,17 @@
   
   <title>hello | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一级标题">
+  <meta name="description" content="一级标题 指针学习  在C语言的学习过程中，指针是相当重要的一部分，学好指针对C的学习有很重要的意义。 指针和内存 如果说内存相当于街道，那么地址就相当于位于街道中房子的房号。 一个字节（8bit）包含一个地址。内存中每一个位置都包含一个独一无二的地址标识，而每一个位置都包含一个值。 注意：①区别指针变量的内容（即地址）、指针指向变量的内容、指针的地址。 ②*p分别作为左值和右值时具有不同的意义">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hello">
 <meta property="og:url" content="http://yoursite.com/2019/02/16/hello/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="一级标题">
+<meta property="og:description" content="一级标题 指针学习  在C语言的学习过程中，指针是相当重要的一部分，学好指针对C的学习有很重要的意义。 指针和内存 如果说内存相当于街道，那么地址就相当于位于街道中房子的房号。 一个字节（8bit）包含一个地址。内存中每一个位置都包含一个独一无二的地址标识，而每一个位置都包含一个值。 注意：①区别指针变量的内容（即地址）、指针指向变量的内容、指针的地址。 ②*p分别作为左值和右值时具有不同的意义">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-16T08:44:47.754Z">
+<meta property="og:updated_time" content="2019-02-25T09:22:33.064Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hello">
-<meta name="twitter:description" content="一级标题">
+<meta name="twitter:description" content="一级标题 指针学习  在C语言的学习过程中，指针是相当重要的一部分，学好指针对C的学习有很重要的意义。 指针和内存 如果说内存相当于街道，那么地址就相当于位于街道中房子的房号。 一个字节（8bit）包含一个地址。内存中每一个位置都包含一个独一无二的地址标识，而每一个位置都包含一个值。 注意：①区别指针变量的内容（即地址）、指针指向变量的内容、指针的地址。 ②*p分别作为左值和右值时具有不同的意义">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -86,11 +86,56 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1>
+        <h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><p> 指针学习</p>
+<p> 在C语言的学习过程中，指针是相当重要的一部分，学好指针对C的学习有很重要的意义。</p>
+<p>指针和内存</p>
+<p>如果说内存相当于街道，那么地址就相当于位于街道中房子的房号。</p>
+<p>一个字节（8bit）包含一个地址。内存中每一个位置都包含一个独一无二的地址标识，而每一个位置都包含一个值。</p>
+<p>注意：①区别指针变量的内容（即地址）、指针指向变量的内容、指针的地址。</p>
+<pre><code>②*p分别作为左值和右值时具有不同的意义
+
+  *p放在“=”左边表示p指向的空间
+
+  *p放在“=”右边表示解引用p
+
+③在对指针进行初始化的时候有两种非法情况
+
+如：int *pa；→这是未初始化的指针，这种做法是不行的
+
+    *pa=10；
+
+
+
+    int *pret=fun（）；→这是个非法的指针，不能将一个函数直接赋给一个指针变量
+
+    *pret=20；
+</code></pre><p>2.指针常量</p>
+<p>例：</p>
+<p><em>（（int </em>）0x0018ff44）=20</p>
+<p>其中0x0018ff44是一个常量，不能直接引用，需强制类型转换为一个整型地址    </p>
+<p>改为：int a=10；</p>
+<pre><code>*（（int *）0x0018ff44）=30；
+</code></pre><p>   此时a=30；</p>
+<p>3.指针的指针</p>
+<p>例：①int *p=NULL；</p>
+<pre><code>int **ptr=&amp;p；→二级指针变量存储一级变量的地址
+
+②int a=10； 
+
+ int *p=&amp;；→想要将a的内容变成20，则可以写成*p=20或者**q=20
+</code></pre><p>4.指针运算</p>
+<p>①对于一个指针变量<em>p，p+n后增加的字节取决于p的数据类型，如果是一个char类型的，则增加n个字节，如果是一个int类型的，则增加n</em>4个字节。</p>
+<p>②指针1-指针2之间的元素等于指针1和指针2之间元素的个数</p>
+<p>③允许指向数组元素的指针与指向数组最后一个元素的指针进行比较，但不允许与指向第一个元素之间的内存进行比较。</p>
+<p>例：用指针实现一个冒泡排序的函数</p>
+<p>void bubble_sort(int arr[], int sz)<br>{<br>    int i = 0;<br>    int j = 0;<br>    int tmp = 0;<br>    for (i = 0; i &lt; sz; i++)<br>    {<br>        for (j = 0; j &lt;= sz - i - 1; j++)<br>        {<br>            if ((<em>arr + j)&gt;(</em>arr + j + 1))<br>                tmp = <em>(arr + j);
+                </em>(arr + j ) = <em>(arr + j+1);
+            </em>(arr + j + 1) = tmp;<br>        }<br>    }</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/02/16/hello/" data-id="cjs78n0s70000b4uee118k71p" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/02/16/hello/" data-id="cjsk65hvs000140uep8sqhb0j" class="article-share-link">Share</a>
       
       
     </footer>
